@@ -1,4 +1,4 @@
-package com.geektech.notrapp;
+package com.geektech.noteapp;
 
 import android.os.Bundle;
 

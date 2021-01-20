@@ -1,4 +1,4 @@
-package com.geektech.notrapp.ui.home;
+package com.geektech.noteapp.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

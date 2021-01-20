@@ -1,4 +1,4 @@
-package com.geektech.notrapp;
+package com.geektech.noteapp;
 
 import android.os.Bundle;
 
@@ -12,6 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.geektech.noteapp.models.Note;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 public class FormFragment extends Fragment {
 
@@ -33,9 +38,11 @@ public class FormFragment extends Fragment {
 
     private void save() {
         String text = editText.getText().toString().trim();
+        String date = DateFormat.getDateTimeInstance().format(new Date());
+        Note note = new Note(text, date);
         Bundle bundle = new Bundle();
-        bundle.putString("text",text);
-        getParentFragmentManager().setFragmentResult("rk_form",bundle);
+        bundle.putSerializable("note", note);
+        getParentFragmentManager().setFragmentResult("rk_form", bundle);
         close();
     }
 
