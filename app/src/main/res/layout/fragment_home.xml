@@ -7,6 +7,7 @@
     android:background="#296291"
     tools:context=".ui.home.HomeFragment">
 
+<!--TODO: 4th Home Work - sorting by time (14, 15 ln.) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

@@ -12,5 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+       <item name="editTextBackground">@drawable/backgr_for_edit_txt</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="background">@drawable/backgr_for_edit_txt</item>
     </style>
 </resources>
