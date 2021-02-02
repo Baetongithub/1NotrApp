@@ -20,6 +20,7 @@ import java.util.Date;
 
 public class FormFragment extends Fragment {
 
+    private Note note;
     private EditText editText;
 
     @Override
@@ -32,13 +33,25 @@ public class FormFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         editText = view.findViewById(R.id.edit_text);
-        view.findViewById(R.id.bttn_save).setOnClickListener(v ->
+        view.findViewById(R.id.button_save).setOnClickListener(v ->
                 save());
+
+        note = (Note) requireArguments().getSerializable("note");
+        if (note != null) {
+            editText.setText(note.getTitle());
+        }
     }
 
     private void save() {
         String text = editText.getText().toString().trim();
         String date = DateFormat.getDateTimeInstance().format(new Date());
+        if (note == null) {
+            note = new Note(text, date);
+            App.getAppDatabase().noteDao().insert(note);
+        } else {
+            note.setTitle(text);
+            App.getAppDatabase().noteDao().update(note);
+        }
         Note note = new Note(text, date);
         Bundle bundle = new Bundle();
         bundle.putSerializable("note", note);

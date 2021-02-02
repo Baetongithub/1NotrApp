@@ -1,8 +1,6 @@
 package com.geektech.noteapp;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,9 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Note> list;
+    public ArrayList<Note> list;
+    private OnItemClickListener onItemClickListener;
+    private Note note;
 
     public NoteAdapter(Context context) {
         this.context = context;
@@ -40,53 +40,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(list.get(position));
-        holder.textTitle.setOnLongClickListener(v -> {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-            alertDialog.setTitle("Delete");
-            alertDialog.setMessage("Remove this item?");
-            alertDialog.setPositiveButton("NO, CANCEL", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    list.remove(position);
-                    notifyItemRemoved(position);
-                    notifyDataSetChanged();
-                }
-            });
-            AlertDialog dialog = alertDialog.create();
-            dialog.setIcon(R.drawable.ic_delete_forever_24);
-            dialog.show();
-            return true;
-        });
-
-        holder.textDate.setOnLongClickListener(v->{
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-            alertDialog.setTitle("Delete");
-            alertDialog.setMessage("Remove this item?");
-            alertDialog.setPositiveButton("NO, CANCEL", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    list.remove(position);
-                    notifyItemRemoved(position);
-                    notifyDataSetChanged();
-                }
-            });
-            AlertDialog dialog = alertDialog.create();
-            dialog.setIcon(R.drawable.ic_delete_forever_24);
-            dialog.show();
-            return true;
-        });
     }
 
     @Override
@@ -94,24 +47,47 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         return list.size();
     }
 
-    public void addItem(Note note) {
-        list.add(note);
-        notifyDataSetChanged();
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
-    public void addList(List<Note> list) {
+    public void addItem(Note note) {
+        this.note = note;
+        list.add(note);
+        notifyItemInserted(list.indexOf(note));
+    }
+
+    public void setList(List<Note> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
     }
 
+    public Note getItem(int position) {
+        return list.get(position);
+    }
+
+    public void updateItem(int pos, Note note) {
+        list.set(pos, note);
+        notifyItemChanged(pos);
+    }
+
+    public void remove(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textTitle;
-        private TextView textDate;
+        private TextView textTitle, textDate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            itemView.setOnClickListener(v ->
+                    onItemClickListener.onClick(getAdapterPosition()));
+            itemView.setOnLongClickListener(v -> {
+                onItemClickListener.onLongClick(getAdapterPosition());
+                return true;
+            });
             textTitle = itemView.findViewById(R.id.text_title);
             textDate = itemView.findViewById(R.id.text_date);
         }
@@ -120,8 +96,5 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             textDate.setText(note.getDate());
             textTitle.setText(note.getTitle());
         }
-
-
     }
-
 }
