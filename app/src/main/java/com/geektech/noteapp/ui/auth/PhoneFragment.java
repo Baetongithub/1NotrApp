@@ -55,6 +55,13 @@ public class PhoneFragment extends Fragment {
         button = view.findViewById(R.id.button_next);
         editVerifCode.setVisibility(View.INVISIBLE);
         button.setOnClickListener(v -> requestSMS());
+        if (button.getText().toString().equals("Get in")) {
+            button.setOnClickListener(v -> {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+                navController.navigateUp();
+            });
+
+        }
         setCallBacks();
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),
