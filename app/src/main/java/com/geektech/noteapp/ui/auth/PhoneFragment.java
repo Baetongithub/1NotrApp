@@ -80,7 +80,7 @@ public class PhoneFragment extends Fragment {
                 editVerifCode.setVisibility(View.GONE);
             }
 
-      //  TODO: 6th Home Work - window to enter code from requestSMS & count down timer (also on 47 to 51 ln.)
+            //  TODO: 6th Home Work - window to enter code from requestSMS & count down timer (also on 47 to 51 ln.)
             @SuppressLint("SetTextI18n")
             @Override
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
