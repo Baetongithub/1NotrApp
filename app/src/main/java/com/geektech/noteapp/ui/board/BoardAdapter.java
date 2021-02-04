@@ -69,7 +69,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         }
 
         public void bind(BoardModel boardModel) {
-     //TODO:   3rd Home Work
+     //TODO:   3rd Home Work - init. views & showing button on the 3rd page
             buttonGetStarted.setVisibility(View.GONE);
             textTitle.setText(boardModel.getTitle());
             textDesc.setText(boardModel.getTitleBelow());

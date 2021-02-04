@@ -41,4 +41,10 @@
         android:label="fragment_board"
         tools:layout="@layout/fragment_board" />
 
+    <fragment
+        android:id="@+id/phone_fragment"
+        android:name="com.geektech.noteapp.ui.auth.PhoneFragment"
+        android:label="fragment_phone"
+        tools:layout="@layout/fragment_phone" />
+
 </navigation>

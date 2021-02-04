@@ -19,13 +19,6 @@
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <!--<EditText                                   -->
-    <!--                                            -->
-    <!--    android:layout_width="match_parent"     -->
-    <!--    android:layout_height="wrap_content"    -->
-    <!--    android:inputType="textCapSentences" /> -->
-
     <Button
         android:id="@+id/button_save"
         android:layout_width="match_parent"

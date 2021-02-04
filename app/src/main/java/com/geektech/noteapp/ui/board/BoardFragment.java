@@ -48,7 +48,7 @@ public class BoardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         linearLayoutTabIndctrs = view.findViewById(R.id.tab_indicator);
         buttonNext = view.findViewById(R.id.button_next_onboard);
-     //TODO: 3rd Home Work
+     //TODO: 3rd Home Work - setting skip button
         buttonSkip = view.findViewById(R.id.button_skip_onboard);
         buttonSkip.setOnClickListener(v -> close());
 

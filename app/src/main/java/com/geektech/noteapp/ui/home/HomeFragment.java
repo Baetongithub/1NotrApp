@@ -141,7 +141,7 @@ public class HomeFragment extends Fragment {
                 alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //TODO:       4th Home Work
+                        //TODO:       4th Home Work - removing from DB
                         App.getAppDatabase().noteDao().delete(note);
                         adapter.remove(position);
                         adapter.notifyItemRemoved(position);
