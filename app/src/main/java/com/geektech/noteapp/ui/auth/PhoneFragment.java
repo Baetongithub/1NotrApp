@@ -55,6 +55,13 @@ public class PhoneFragment extends Fragment {
         button = view.findViewById(R.id.button_next);
         editVerifCode.setVisibility(View.INVISIBLE);
         button.setOnClickListener(v -> requestSMS());
+        if (button.getText().toString().equals("Get in")) {
+            button.setOnClickListener(v -> {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+                navController.navigateUp();
+            });
+
+        }
         setCallBacks();
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),
@@ -80,7 +87,7 @@ public class PhoneFragment extends Fragment {
                 editVerifCode.setVisibility(View.GONE);
             }
 
-      //  TODO: 6th Home Work - window to enter code from requestSMS & count down timer (also on 47 to 51 ln.)
+            //  TODO: 6th Home Work - window to enter code from requestSMS & count down timer (also on 47 to 51 ln.)
             @SuppressLint("SetTextI18n")
             @Override
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
