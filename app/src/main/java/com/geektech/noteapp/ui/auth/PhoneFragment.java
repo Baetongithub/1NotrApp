@@ -56,7 +56,6 @@ public class PhoneFragment extends Fragment {
         editVerifCode.setVisibility(View.INVISIBLE);
         button.setOnClickListener(v -> requestSMS());
         setCallBacks();
-
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),
                 new OnBackPressedCallback(true) {
                     @Override
