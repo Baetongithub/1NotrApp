@@ -43,18 +43,4 @@ public class Note implements Serializable {
         return title;
     }
 
-    public static final Comparator<Note> BY_TITLE_ASCENDING = new Comparator<Note>() {
-        @Override
-        public int compare(Note o1, Note o2) {
-            return o1.getTitle().compareTo(o2.getTitle());
-        }
-    };
-
-    public static final Comparator<Note> BY_TITLE_DESCENDING = new Comparator<Note>() {
-        @Override
-        public int compare(Note o1, Note o2) {
-            return o2.getTitle().compareTo(o1.getTitle());
-        }
-    };
-
 }

@@ -25,6 +25,8 @@ import com.geektech.noteapp.NoteAdapter;
 import com.geektech.noteapp.OnItemClickListener;
 import com.geektech.noteapp.R;
 import com.geektech.noteapp.models.Note;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Note> list;
     private boolean update = false;
     private int pos;
+    private DocumentReference docRef = FirebaseFirestore.getInstance().document("sampleData/inspiration");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -141,7 +144,9 @@ public class HomeFragment extends Fragment {
                 alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //TODO:       4th Home Work - removing from DB
+        //          TODO: 7th Home Work - removing from FireStore
+                        docRef.delete();
+        //          TODO:       4th Home Work - removing from DB
                         App.getAppDatabase().noteDao().delete(note);
                         adapter.remove(position);
                         adapter.notifyItemRemoved(position);
